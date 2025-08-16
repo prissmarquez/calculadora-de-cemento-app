@@ -17,9 +17,16 @@ class _MainpageState extends State<Mainpage> {
         padding: EdgeInsets.only(top: 80),
         child: Column(
           children: [
-            Text("Calcule el Volumen", style: TextStyle(fontSize: 15)),
+            Text(
+              "Calculadora de\n  Concreto", 
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+                color: const Color.fromARGB(255, 10, 19, 106)
+                )),
 
-            SizedBox(height: 25),
+            SizedBox(height: 40),
 
             Container(
               child: Row(
@@ -50,7 +57,7 @@ class _MainpageState extends State<Mainpage> {
                     height: 50,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage("lib/images/cubo.png"),
+                        image: AssetImage("lib/images/invertir.png"),
                       ),
                     ),
                   ),
@@ -58,18 +65,34 @@ class _MainpageState extends State<Mainpage> {
               ),
             ),
 
+            SizedBox(
+              height: 25
+            ),
+
             Text("Ancho"),
 
-            SizedBox(
-              width: 100,
-              height: 50,
-              child: TextField(
-                keyboardType: TextInputType.number,
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.digitsOnly, // Allow only digits
+            Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SizedBox(
+                    width: 100,
+                    height: 50,
+                    child: TextField(
+                      textAlignVertical: TextAlignVertical.center,
+                      keyboardType: TextInputType.number,
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.digitsOnly, // Allow only digits
+                      ],
+                  
+                      decoration: InputDecoration(
+                        labelText: "0",
+                        ),
+                    ),
+                  ),
+                   //para eligir la unidadd
+                  Mydropdownbutton()
                 ],
-
-                decoration: InputDecoration(labelText: "0"),
               ),
             ),
 
@@ -77,7 +100,35 @@ class _MainpageState extends State<Mainpage> {
 
             Container(
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  SizedBox(
+                     width: 100,
+                     height: 50,
+                    child: TextField(
+                      keyboardType: TextInputType.number,
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter
+                            .digitsOnly, // Allow only digits
+                      ],
+                              
+                      decoration: InputDecoration(labelText: "0"),
+                    ),
+                  ),
+
+                   //para eligir la unidadd
+                  Mydropdownbutton()
+                ],
+              ),
+            ),
+
+            Text("Profundidad"),
+
+            Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  //es el textField
                   SizedBox(
                     width: 100,
                     height: 50,
@@ -91,42 +142,13 @@ class _MainpageState extends State<Mainpage> {
                       decoration: InputDecoration(labelText: "0"),
                     ),
                   ),
-
-                  SizedBox(
-                    child: TextField(
-                      keyboardType: TextInputType.number,
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.digitsOnly
-                      ],
-                    ),
-                  )
+                  //para eligir la unidadd
+                  Mydropdownbutton()
                 ],
               ),
             ),
 
-            Text("Profundidad"),
 
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  SizedBox(
-              width: 100,
-              height: 50,
-              child: TextField(
-                keyboardType: TextInputType.number,
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.digitsOnly, // Allow only digits
-                ],
-
-                decoration: InputDecoration(labelText: "0"),
-              ),
-            ),
-
-            Mydropdownbutton()
-                ],
-              ),
-            ),
 
             SizedBox(height: 25),
 
