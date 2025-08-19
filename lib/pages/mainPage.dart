@@ -84,9 +84,9 @@ class _MainpageState extends State<Mainpage> {
                       inputFormatters: <TextInputFormatter>[
                         FilteringTextInputFormatter.digitsOnly, // Allow only digits
                       ],
-                  
+                      textAlign: TextAlign.center,
                       decoration: InputDecoration(
-                        labelText: "0",
+                        hintText: "0"
                         ),
                     ),
                   ),
@@ -111,8 +111,10 @@ class _MainpageState extends State<Mainpage> {
                         FilteringTextInputFormatter
                             .digitsOnly, // Allow only digits
                       ],
-                              
-                      decoration: InputDecoration(labelText: "0"),
+                       textAlign: TextAlign.center,
+                      decoration: InputDecoration(
+                        hintText: "0"
+                        ),
                     ),
                   ),
 
@@ -138,8 +140,10 @@ class _MainpageState extends State<Mainpage> {
                         FilteringTextInputFormatter
                             .digitsOnly, // Allow only digits
                       ],
-
-                      decoration: InputDecoration(labelText: "0"),
+                      textAlign: TextAlign.center,
+                      decoration: InputDecoration(
+                        hintText: "0"
+                        ),
                     ),
                   ),
                   //para eligir la unidadd
