@@ -1,4 +1,5 @@
 import 'package:cement_app/components/mydropdownbutton.dart';
+import 'package:cement_app/components/myselectableimage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -10,6 +11,8 @@ class Mainpage extends StatefulWidget {
 }
 
 class _MainpageState extends State<Mainpage> {
+  String? selectedImage;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,42 +31,79 @@ class _MainpageState extends State<Mainpage> {
 
             SizedBox(height: 40),
 
+            // Container(
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+            //     children: [
+            //       Container(
+            //         width: 50,
+            //         height: 50,
+            //         decoration: BoxDecoration(
+            //           image: DecorationImage(
+            //             image: AssetImage("lib/images/cilindro.png"),
+            //           ),
+            //         ),
+            //       ),
+
+            //       Container(
+            //         width: 50,
+            //         height: 50,
+            //         decoration: BoxDecoration(
+            //           image: DecorationImage(
+            //             image: AssetImage("lib/images/cono.png"),
+            //           ),
+            //         ),
+            //       ),
+
+            //       Container(
+            //         width: 50,
+            //         height: 50,
+            //         decoration: BoxDecoration(
+            //           image: DecorationImage(
+            //             image: AssetImage("lib/images/invertir.png"),
+            //           ),
+            //         ),
+            //       ),
+            //     ]-,
+            //   ),
+            // ),
+
             Container(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage("lib/images/cilindro.png"),
-                      ),
-                    ),
-                  ),
+                  
+                  Myselectableimage(
+              imagePath: "lib/images/cilindro.png", 
+              isSelected: selectedImage == "lib/images/cilindro.png",
+              onTap: (){
+                setState(() {
+                  selectedImage = "lib/images/cilindro.png";
+                });
+              },
+               ),
 
-                  Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage("lib/images/cono.png"),
-                      ),
-                    ),
-                  ),
-
-                  Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage("lib/images/invertir.png"),
-                      ),
-                    ),
-                  ),
+            Myselectableimage(
+              imagePath: "lib/images/cono.png", 
+              isSelected: selectedImage == "lib/images/cono.png",
+              onTap: (){
+                setState(() {
+                  selectedImage = "lib/images/cono.png";
+                });
+              }),
+            
+            Myselectableimage(
+              imagePath: "lib/images/invertir.png", 
+              isSelected: selectedImage == "lib/images/invertir.png",
+              onTap: (){
+                setState(() {
+                  selectedImage = "lib/images/invertir.png";
+                });
+              }),
                 ],
               ),
             ),
+            
 
             SizedBox(
               height: 25
