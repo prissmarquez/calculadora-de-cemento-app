@@ -1,5 +1,4 @@
 import 'package:cement_app/components/mydropdownbutton.dart';
-import 'package:cement_app/components/myradiobutton_resistencia.dart';
 import 'package:cement_app/components/myselectableimage.dart';
 import 'package:cement_app/pages/typePage.dart';
 import 'package:flutter/material.dart';
@@ -111,15 +110,16 @@ class _MainpageState extends State<Mainpage> {
             
 
             SizedBox(
-              height: 25
+              width: 30,
             ),
 
-            Text("Ancho"),
+            
 
             Container(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  Text("Ancho"),
                   SizedBox(
                     width: 100,
                     height: 50,
@@ -143,30 +143,28 @@ class _MainpageState extends State<Mainpage> {
 
             Text("Largo"),
 
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  SizedBox(
-                     width: 100,
-                     height: 50,
-                    child: TextField(
-                      keyboardType: TextInputType.number,
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter
-                            .digitsOnly, // Allow only digits
-                      ],
-                       textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        hintText: "0"
-                        ),
-                    ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                SizedBox(
+                   width: 100,
+                   height: 50,
+                  child: TextField(
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter
+                          .digitsOnly, // Allow only digits
+                    ],
+                     textAlign: TextAlign.center,
+                    decoration: InputDecoration(
+                      hintText: "0"
+                      ),
                   ),
-
-                   //para eligir la unidadd
-                  Mydropdownbutton()
-                ],
-              ),
+                ),
+            
+                 //para eligir la unidadd
+                Mydropdownbutton()
+              ],
             ),
 
             Text("Profundidad"),

@@ -15,8 +15,13 @@ class _DropdownbuttonState extends State<Mydropdownbutton> {
   @override
   Widget build(BuildContext context) {
     return  DropdownButton<String>(
+      
       value: selectedValue,
-      hint: Text('Selecciona una unidad'),
+      hint: Text(
+        'Selecciona una unidad',
+        style: 
+        TextStyle(fontSize: 12),
+        ),
       items: unidades.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
