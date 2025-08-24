@@ -18,8 +18,8 @@ class Myselectableimage extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 50,
-        height: 50,
+        width: 70,
+        height: 70,
         decoration: BoxDecoration(
           border: Border.all(
             width: 1,

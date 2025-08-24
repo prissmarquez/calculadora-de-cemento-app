@@ -1,5 +1,7 @@
 import 'package:cement_app/components/mydropdownbutton.dart';
+import 'package:cement_app/components/myradiobutton_resistencia.dart';
 import 'package:cement_app/components/myselectableimage.dart';
+import 'package:cement_app/pages/typePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -75,7 +77,10 @@ class _MainpageState extends State<Mainpage> {
                   
                   Myselectableimage(
               imagePath: "lib/images/cilindro.png", 
+              //Tú pasas valores al widget MySelectableImage
               isSelected: selectedImage == "lib/images/cilindro.png",
+              //es la función que se ejecuta cuando el usuario toca la imagen. 
+              //En este caso, cambia la variable selectedImage
               onTap: (){
                 setState(() {
                   selectedImage = "lib/images/cilindro.png";
@@ -191,12 +196,56 @@ class _MainpageState extends State<Mainpage> {
                 ],
               ),
             ),
+            SizedBox(
+              height: 12,
+            ),
 
+            Text("Volumen en metros cúbicos (m³): "),
 
+            Container(
+              
+              width: 170,
+              child: TextField(
+                keyboardType: TextInputType.number,
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter
+                            .digitsOnly, // Allow only digits
+                      ],
+                      textAlign: TextAlign.center,
+                      decoration: InputDecoration(
+                        hintText: "m³"
+                        ),
+              ),
+            ),
 
+            Text("Porcentaje de reserva en (m³): "),
+
+            Container(
+              
+              width: 170,
+              child: TextField(
+                keyboardType: TextInputType.number,
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter
+                            .digitsOnly, // Allow only digits
+                      ],
+                      textAlign: TextAlign.center,
+                      decoration: InputDecoration(
+                        hintText: "m³"
+                        ),
+              ),
+            ),
             SizedBox(height: 25),
 
-            ElevatedButton(onPressed: () {}, child: Text("Siguiente")),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context, 
+                  MaterialPageRoute(builder: (context) => EjemploRadioListTile())
+                  );
+              }, 
+              child: Text("Siguiente")
+              ),
           ],
         ),
       ),
