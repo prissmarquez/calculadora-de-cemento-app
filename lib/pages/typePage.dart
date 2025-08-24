@@ -1,3 +1,4 @@
+import 'package:cement_app/components/mylist_elementoConstruccion.dart';
 import 'package:cement_app/components/myradiobutton_resistencia.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +15,11 @@ class Typepage extends StatelessWidget {
             Container(
               height: 300,
               child: MyradiobuttonResistencia(),
+            ),
+
+            Container(
+              height: 300,
+              child: MylistElementoconstruccion(),
             )
           ],
         ) ,
