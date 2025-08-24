@@ -241,7 +241,7 @@ class _MainpageState extends State<Mainpage> {
               onPressed: () {
                 Navigator.push(
                   context, 
-                  MaterialPageRoute(builder: (context) => EjemploRadioListTile())
+                  MaterialPageRoute(builder: (context) => Typepage())
                   );
               }, 
               child: Text("Siguiente")
