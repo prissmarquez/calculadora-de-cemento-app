@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
-class Mydropdownbutton1<T> extends StatefulWidget {
+class Mydropdownbutton<T> extends StatefulWidget {
   //“El tipo lo va a decidir el que use mi widget”, por eso es T"
   // final List<T> items;
   // final T? selectedValue;
@@ -17,7 +17,7 @@ class Mydropdownbutton1<T> extends StatefulWidget {
   final String Function(T) itemLabelBuilder;
   final String hinText;
 
-  const Mydropdownbutton1({
+  const Mydropdownbutton({
     Key? key,
     required this.items,
     required this.selectedValue,
@@ -27,10 +27,10 @@ class Mydropdownbutton1<T> extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<Mydropdownbutton1<T>> createState() => _Mydropdownbutton1<T>();
+  State<Mydropdownbutton<T>> createState() => _Mydropdownbutton<T>();
 }
 
-class _Mydropdownbutton1<T> extends State<Mydropdownbutton1<T>> {
+class _Mydropdownbutton<T> extends State<Mydropdownbutton<T>> {
   //Piensa que _internalSelectedValue es como el post-it donde el widget apunta cuál fue la última opción elegida.
   //Al inicio: no hay nada seleccionado → está en null.
   //Cuando eliges un valor: se guarda ahí el valor que seleccionaste.
@@ -47,7 +47,7 @@ class _Mydropdownbutton1<T> extends State<Mydropdownbutton1<T>> {
 
   @override
   //cuando padre canbia el valor este actualiza el valor
-  void didUpdateWidget(covariant Mydropdownbutton1<T> oldWidget) {
+  void didUpdateWidget(covariant Mydropdownbutton<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.selectedValue != oldWidget.selectedValue) {
       _internalSelectedValue = widget.selectedValue;
