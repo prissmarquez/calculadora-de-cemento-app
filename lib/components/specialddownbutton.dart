@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 const List<String> unidades = <String>['metros', 'centimetros', 'pulgadas'];
 
-class Mydropdownbutton extends StatefulWidget {
-   Mydropdownbutton({super.key});
+class Specialddownbutton extends StatefulWidget {
+   Specialddownbutton({super.key});
 
   @override
-  State<Mydropdownbutton> createState() => _DropdownbuttonState();
+  State<Specialddownbutton> createState() => _DropdownbuttonState();
 }
 
-class _DropdownbuttonState extends State<Mydropdownbutton> {
+class _DropdownbuttonState extends State<Specialddownbutton> {
   String? selectedValue;
 
   @override

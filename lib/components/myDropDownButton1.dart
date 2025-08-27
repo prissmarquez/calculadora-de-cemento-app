@@ -88,7 +88,8 @@ class _Mydropdownbutton1<T> extends State<Mydropdownbutton1<T>> {
         setState(() {
           _internalSelectedValue = newValue;
         });
-
+        //imagina que el hijo es un botón de ascensor. Cuando alguien lo presiona (newValue), 
+        //el botón avisa al sistema central (padre): “me seleccionaron, lleva al piso X”
         widget.onChanged(newValue);
       },
     );

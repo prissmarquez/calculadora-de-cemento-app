@@ -1,4 +1,4 @@
-import 'package:cement_app/components/mydropdownbutton.dart';
+import 'package:cement_app/components/specialddownbutton.dart';
 import 'package:cement_app/components/myselectableimage.dart';
 import 'package:cement_app/pages/typePage.dart';
 import 'package:flutter/material.dart';
@@ -136,7 +136,7 @@ class _MainpageState extends State<Mainpage> {
                     ),
                   ),
                    //para eligir la unidadd
-                  Mydropdownbutton()
+                  Specialddownbutton()
                 ],
               ),
             ),
@@ -163,7 +163,7 @@ class _MainpageState extends State<Mainpage> {
                 ),
             
                  //para eligir la unidadd
-                Mydropdownbutton()
+                Specialddownbutton()
               ],
             ),
 
@@ -190,7 +190,7 @@ class _MainpageState extends State<Mainpage> {
                     ),
                   ),
                   //para eligir la unidadd
-                  Mydropdownbutton()
+                  Specialddownbutton()
                 ],
               ),
             ),
