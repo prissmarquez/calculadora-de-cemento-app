@@ -1,84 +1,21 @@
 import 'package:cement_app/components/specialddownbutton.dart';
 import 'package:cement_app/components/myselectableimage.dart';
-import 'package:cement_app/components/widgetVolumen.dart';
-import 'package:cement_app/pages/typePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class Mainpage1 extends StatefulWidget {
-  const Mainpage1({super.key});
+class Widgetvolumen extends StatefulWidget {
+  const Widgetvolumen({super.key});
 
   @override
-  State<Mainpage1> createState() => _MainpageState();
+  State<Widgetvolumen> createState() => _WidgetvolumenState();
 }
 
-class _MainpageState extends State<Mainpage1> {
-  List<Widget> Volumen = [];
+class _WidgetvolumenState extends State<Widgetvolumen> {
   String? selectedImage;
 
   @override
-  void initState() {
-    super.initState();
-    Volumen.add(Widgetvolumen());
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.only(top: 80),
-          child: Column(
-            children: [
-              Text(
-                "Calculadora de\n  Concreto",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                  color: const Color.fromARGB(255, 10, 19, 106),
-                ),
-              ),
-
-              SizedBox(height: 30),
-
-              // Container(
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-              //     children: [
-              //       Container(
-              //         width: 50,
-              //         height: 50,
-              //         decoration: BoxDecoration(
-              //           image: DecorationImage(
-              //             image: AssetImage("lib/images/cilindro.png"),
-              //           ),
-              //         ),
-              //       ),
-
-              //       Container(
-              //         width: 50,
-              //         height: 50,
-              //         decoration: BoxDecoration(
-              //           image: DecorationImage(
-              //             image: AssetImage("lib/images/cono.png"),
-              //           ),
-              //         ),
-              //       ),
-
-              //       Container(
-              //         width: 50,
-              //         height: 50,
-              //         decoration: BoxDecoration(
-              //           image: DecorationImage(
-              //             image: AssetImage("lib/images/invertir.png"),
-              //           ),
-              //         ),
-              //       ),
-              //     ]-,
-              //   ),
-              // ),
-              Container(
+    return Container(
                 child: Column(
                   children: [
                     Row(
@@ -197,79 +134,12 @@ class _MainpageState extends State<Mainpage1> {
                         Specialddownbutton(),
                       ],
                     ),
+                    SizedBox(
+                      height: 20,
+                    )
                   ],
                 ),
-              ),
-
-              SizedBox(height: 12),
-
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 8,
-                  ), // reduce espacio interno
-                  minimumSize: Size(50, 30), // tamaño mínimo del botón
-                ),
-                onPressed: () {
-                  setState(() {
-                    Volumen.add(Widgetvolumen());
-                  });
-                },
-                child: Text("Añade otra forma"),
-              ),
-
-              SizedBox(height: 12),
-
-              Column(
-                children: 
-                Volumen
-                ),
-
-              SizedBox(height: 12),
-
-              Text("Volumen en metros cúbicos (m³): "),
-
-              SizedBox(
-                width: 170,
-                child: TextField(
-                  keyboardType: TextInputType.number,
-                  inputFormatters: <TextInputFormatter>[
-                    FilteringTextInputFormatter.digitsOnly, // Allow only digits
-                  ],
-                  textAlign: TextAlign.center,
-                  decoration: InputDecoration(hintText: "m³"),
-                ),
-              ),
-
-              Text("Porcentaje de reserva en (m³): "),
-
-              SizedBox(
-                width: 170,
-                child: TextField(
-                  keyboardType: TextInputType.number,
-                  inputFormatters: <TextInputFormatter>[
-                    FilteringTextInputFormatter.digitsOnly, // Allow only digits
-                  ],
-                  textAlign: TextAlign.center,
-                  decoration: InputDecoration(hintText: "m³"),
-                ),
-              ),
-              SizedBox(height: 25),
-
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Typepage()),
-                  );
-                },
-                child: Text("Siguiente"),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+              );
   }
 }
+

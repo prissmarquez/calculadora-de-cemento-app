@@ -52,8 +52,19 @@ class _TypepageState extends State<Typepage> {
         child: Center(
           child: Column(
             children: [
-              Padding(padding: EdgeInsetsGeometry.all(30)),
-          
+              Padding(padding: EdgeInsetsGeometry.only(
+                top: 90,
+                left: 30,
+                right: 30
+                )),
+
+                Text(
+                  "Caracteristicas",
+                  style: TextStyle(
+                    
+                    fontSize: 20
+                  ),
+                  ),
               Text("Elemento de Construcción: "),
               Mydropdownbutton<String>(
                 hinText: "Selecione un Elemento",
@@ -66,7 +77,9 @@ class _TypepageState extends State<Typepage> {
                 },
                 itemLabelBuilder: (elementos) => elementos,
               ),
-          
+
+              SizedBox(height: 20),
+
               Text("Tipo de Servicio: "),
               Mydropdownbutton<String>(
                 hinText: "Selecione un Elemento",
@@ -79,7 +92,9 @@ class _TypepageState extends State<Typepage> {
                 },
                 itemLabelBuilder: (servicio) => servicio,
               ),
-          
+
+              SizedBox(height: 20),
+
               Text("Resistencia a la compresión (fc): "),
               Mydropdownbutton<String>(
                 hinText: "Selecione un Elemento",
@@ -92,7 +107,9 @@ class _TypepageState extends State<Typepage> {
                 },
                 itemLabelBuilder: (resistencia) => resistencia,
               ),
-          
+
+              SizedBox(height: 20),
+
               Text("Tiempo de fraguado: "),
               Mydropdownbutton<String>(
                 hinText: "Selecione un Elemento",
@@ -105,7 +122,9 @@ class _TypepageState extends State<Typepage> {
                 },
                 itemLabelBuilder: (fraguado) => fraguado,
               ),
-          
+
+              SizedBox(height: 20),
+
               Text("Revenimiento en Centímetros (cm): "),
               Mydropdownbutton<String>(
                 hinText: "Selecione un Elemento",
@@ -118,11 +137,18 @@ class _TypepageState extends State<Typepage> {
                 },
                 itemLabelBuilder: (revenimiento) => revenimiento,
               ),
-          
+
               SizedBox(height: 12),
-          
+
               ElevatedButton(onPressed: () {}, child: Text("Siguiente")),
-              ElevatedButton(onPressed: () {}, child: Text("Atras")),
+
+              SizedBox(height: 25),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text("Atras"),
+              ),
             ],
           ),
         ),
