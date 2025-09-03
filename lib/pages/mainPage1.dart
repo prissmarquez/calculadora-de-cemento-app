@@ -65,7 +65,7 @@ class _MainpageState extends State<Mainpage1> {
 
               SizedBox(height: 30),
 
-             //fila de formas
+              //fila de formas
               Selectableforma(
                 onFormaSelected: (tipo) {
                   setState(() {
@@ -73,7 +73,6 @@ class _MainpageState extends State<Mainpage1> {
                   });
                 },
               ),
-
 
               if (selectedImage != null)
                 Container(child: buildWidget(Forma(selectedImage!))),
@@ -109,7 +108,7 @@ class _MainpageState extends State<Mainpage1> {
                 },
                 child: Text("Añade otra forma"),
               ),
-               SizedBox(height: 12),
+              SizedBox(height: 12),
 
               ElevatedButton(
                 onPressed: formas.isNotEmpty

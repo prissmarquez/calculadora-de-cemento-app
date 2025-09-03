@@ -76,7 +76,7 @@ class _WidgetcilindroState extends State<Widgetcilindro> {
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
                   hintStyle: TextStyle(fontSize: 12),
-                  hintText: "Ancho",
+                  hintText: "Profundidad",
                 ),
               ),
             ),
