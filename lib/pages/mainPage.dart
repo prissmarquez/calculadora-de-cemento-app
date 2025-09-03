@@ -1,6 +1,8 @@
-import 'package:cement_app/components/specialddownbutton.dart';
-import 'package:cement_app/components/myselectableimage.dart';
+import 'package:cement_app/components/selectableForma.dart';
+import 'package:cement_app/components/widgetRectanguloTrinagulo.dart';
 import 'package:cement_app/components/widgetVolumen.dart';
+import 'package:cement_app/components/widgetcilindro.dart';
+import 'package:cement_app/components/widgetcubo.dart';
 import 'package:cement_app/pages/typePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,14 +14,35 @@ class Mainpage1 extends StatefulWidget {
   State<Mainpage1> createState() => _MainpageState();
 }
 
+// Clase para manejar tipo de forma
+class Forma {
+  String tipo;
+  Forma(this.tipo);
+}
+
 class _MainpageState extends State<Mainpage1> {
-  List<Widget> Volumen = [];
+  List<Forma> formas = [];
   String? selectedImage;
+
+  // Método que decide qué widget mostrar
+  Widget buildWidget(Forma forma) {
+    switch (forma.tipo) {
+      case "cilindro":
+        return Widgetcilindro();
+      case "cubo":
+        return Widgetcubo();
+      case "cono":
+        return Widgetrectangulotrinagulo();
+      case "volumen":
+      default:
+        return Widgetvolumen();
+    }
+  }
 
   @override
   void initState() {
     super.initState();
-    Volumen.add(Widgetvolumen());
+    selectedImage = "volumen";
   }
 
   @override
@@ -42,198 +65,61 @@ class _MainpageState extends State<Mainpage1> {
 
               SizedBox(height: 30),
 
-              // Container(
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-              //     children: [
-              //       Container(
-              //         width: 50,
-              //         height: 50,
-              //         decoration: BoxDecoration(
-              //           image: DecorationImage(
-              //             image: AssetImage("lib/images/cilindro.png"),
-              //           ),
-              //         ),
-              //       ),
+              //fila de formas
+              Selectableforma(
+                onFormaSelected: (tipo) {
+                  setState(() {
+                    selectedImage = tipo;
+                  });
+                },
+              ),
 
-              //       Container(
-              //         width: 50,
-              //         height: 50,
-              //         decoration: BoxDecoration(
-              //           image: DecorationImage(
-              //             image: AssetImage("lib/images/cono.png"),
-              //           ),
-              //         ),
-              //       ),
+              if (selectedImage != null)
+                Container(child: buildWidget(Forma(selectedImage!))),
 
-              //       Container(
-              //         width: 50,
-              //         height: 50,
-              //         decoration: BoxDecoration(
-              //           image: DecorationImage(
-              //             image: AssetImage("lib/images/invertir.png"),
-              //           ),
-              //         ),
-              //       ),
-              //     ]-,
-              //   ),
-              // ),
-              Container(
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Myselectableimage(
-                          imagePath: "lib/images/cilindro.png",
-                          //Tú pasas valores al widget MySelectableImage
-                          isSelected:
-                              selectedImage == "lib/images/cilindro.png",
-                          //es la función que se ejecuta cuando el usuario toca la imagen.
-                          //En este caso, cambia la variable selectedImage
-                          onTap: () {
-                            setState(() {
-                              selectedImage = "lib/images/cilindro.png";
-                            });
-                          },
-                        ),
+              SizedBox(height: 12),
 
-                        Myselectableimage(
-                          imagePath: "lib/images/cono.png",
-                          isSelected: selectedImage == "lib/images/cono.png",
-                          onTap: () {
-                            setState(() {
-                              selectedImage = "lib/images/cono.png";
-                              
-                            });
-                          },
-                        ),
-
-                        Myselectableimage(
-                          imagePath: "lib/images/invertir.png",
-                          isSelected:
-                              selectedImage == "lib/images/invertir.png",
-                          onTap: () {
-                            setState(() {
-                              selectedImage = "lib/images/invertir.png";
-                            });
-                          },
-                        ),
-                      ],
-                    ),
-
-                    SizedBox(height: 20),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        SizedBox(
-                          width: 80,
-                          height: 50,
-                          child: TextField(
-                            textAlignVertical: TextAlignVertical.center,
-                            keyboardType: TextInputType.number,
-                            inputFormatters: <TextInputFormatter>[
-                              FilteringTextInputFormatter
-                                  .digitsOnly, // Allow only digits
-                            ],
-                            textAlign: TextAlign.center,
-                            decoration: InputDecoration(
-                              hintStyle: TextStyle(fontSize: 12),
-                              hintText: "Ancho",
-                            ),
-                          ),
-                        ),
-                        //para eligir la unidadd
-                        Specialddownbutton(),
-                      ],
-                    ),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        SizedBox(
-                          width: 80,
-                          height: 50,
-                          child: TextField(
-                            keyboardType: TextInputType.number,
-                            inputFormatters: <TextInputFormatter>[
-                              FilteringTextInputFormatter
-                                  .digitsOnly, // Allow only digits
-                            ],
-                            textAlign: TextAlign.center,
-                            decoration: InputDecoration(
-                              hintStyle: TextStyle(fontSize: 12),
-                              hintText: "Largo",
-                            ),
-                          ),
-                        ),
-
-                        //para eligir la unidadd
-                        Specialddownbutton(),
-                      ],
-                    ),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        //es el textField
-                        SizedBox(
-                          width: 80,
-                          height: 50,
-                          child: TextField(
-                            keyboardType: TextInputType.number,
-                            inputFormatters: <TextInputFormatter>[
-                              FilteringTextInputFormatter
-                                  .digitsOnly, // Allow only digits
-                            ],
-                            textAlign: TextAlign.center,
-                            decoration: InputDecoration(
-                              hintStyle: TextStyle(fontSize: 12),
-                              hintText: "Profundidad",
-                            ),
-                          ),
-                        ),
-                        //para eligir la unidadd
-                        Specialddownbutton(),
-                      ],
-                    ),
-                  ],
-                ),
+              Column(
+                children: formas.asMap().entries.map((entry) {
+                  int index = entry.key;
+                  Forma f = entry.value;
+                  return Column(
+                    children: [
+                      Selectableforma(
+                        onFormaSelected: (tipo) {
+                          setState(() {
+                            formas[index].tipo = tipo;
+                          });
+                        },
+                      ),
+                      buildWidget(f), // Widgetvolumen o cualquier otro
+                    ],
+                  );
+                }).toList(),
               ),
 
               SizedBox(height: 12),
 
               ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 8,
-                  ), // reduce espacio interno
-                  minimumSize: Size(50, 30), // tamaño mínimo del botón
-                ),
                 onPressed: () {
                   setState(() {
-                    Volumen.add(Widgetvolumen());
+                    formas.add(Forma(selectedImage!));
                   });
                 },
                 child: Text("Añade otra forma"),
               ),
-
-              ElevatedButton(
-                onPressed: Volumen.isNotEmpty
-                    ? () {
-                        setState(() {
-                          Volumen.removeAt(Volumen.length - 1);
-                        });
-                      }
-                    : null, // aquí se desactiva el botón
-                child: Text("Elimar la forma"),
-              ),
-
               SizedBox(height: 12),
 
-              Column(children: Volumen),
+              ElevatedButton(
+                onPressed: formas.isNotEmpty
+                    ? () {
+                        setState(() {
+                          formas.removeLast();
+                        });
+                      }
+                    : null,
+                child: Text("Eliminar la forma"),
+              ),
 
               SizedBox(height: 12),
 
