@@ -16,7 +16,7 @@ class Mainpage1 extends StatefulWidget {
 
 // Clase para manejar tipo de forma
 class Forma {
-  final String tipo;
+  String tipo;
   Forma(this.tipo);
 }
 
@@ -26,24 +26,24 @@ class _MainpageState extends State<Mainpage1> {
 
   // Método que decide qué widget mostrar
   Widget buildWidget(Forma forma) {
-  switch (forma.tipo) {
-    case "cilindro":
-      return Widgetcilindro();
-    case "cubo":
-      return Widgetcubo();
-    case "cono":
-      return Widgetrectangulotrinagulo();
-    case "volumen": 
-    default:
-      return Widgetvolumen();
+    switch (forma.tipo) {
+      case "cilindro":
+        return Widgetcilindro();
+      case "cubo":
+        return Widgetcubo();
+      case "cono":
+        return Widgetrectangulotrinagulo();
+      case "volumen":
+      default:
+        return Widgetvolumen();
+    }
   }
-}
 
   @override
-void initState() {
-  super.initState();
-  selectedImage = "volumen"; 
-}
+  void initState() {
+    super.initState();
+    selectedImage = "volumen";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +65,7 @@ void initState() {
 
               SizedBox(height: 30),
 
+             //fila de formas
               Selectableforma(
                 onFormaSelected: (tipo) {
                   setState(() {
@@ -73,32 +74,42 @@ void initState() {
                 },
               ),
 
-              SizedBox(height: 20),
 
               if (selectedImage != null)
                 Container(child: buildWidget(Forma(selectedImage!))),
 
               SizedBox(height: 12),
 
-              Column(children: formas.map((f) => buildWidget(f)).toList()),
+              Column(
+                children: formas.asMap().entries.map((entry) {
+                  int index = entry.key;
+                  Forma f = entry.value;
+                  return Column(
+                    children: [
+                      Selectableforma(
+                        onFormaSelected: (tipo) {
+                          setState(() {
+                            formas[index].tipo = tipo;
+                          });
+                        },
+                      ),
+                      buildWidget(f), // Widgetvolumen o cualquier otro
+                    ],
+                  );
+                }).toList(),
+              ),
 
               SizedBox(height: 12),
 
               ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 8,
-                  ), // reduce espacio interno
-                  minimumSize: Size(50, 30), // tamaño mínimo del botón
-                ),
                 onPressed: () {
                   setState(() {
-                    formas.add(Forma(selectedImage ?? "volumen"));
+                    formas.add(Forma(selectedImage!));
                   });
                 },
                 child: Text("Añade otra forma"),
               ),
+               SizedBox(height: 12),
 
               ElevatedButton(
                 onPressed: formas.isNotEmpty
