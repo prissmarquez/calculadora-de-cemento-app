@@ -1,3 +1,4 @@
+import 'package:cement_app/components/selectableForma.dart';
 import 'package:cement_app/components/widgetRectanguloTrinagulo.dart';
 import 'package:cement_app/components/widgetVolumen.dart';
 import 'package:cement_app/components/widgetcilindro.dart';
@@ -13,28 +14,36 @@ class Mainpage1 extends StatefulWidget {
   State<Mainpage1> createState() => _MainpageState();
 }
 
+// Clase para manejar tipo de forma
 class Forma {
-  final String tipo; // "cilindro", "cubo", etc.
+  final String tipo;
   Forma(this.tipo);
 }
 
 class _MainpageState extends State<Mainpage1> {
   List<Forma> formas = [];
-
   String? selectedImage;
 
+  // Método que decide qué widget mostrar
   Widget buildWidget(Forma forma) {
-    switch (forma.tipo) {
-      case "cilindro":
-        return Widgetcilindro();
-      case "cono":
-        return Widgetrectangulotrinagulo();
-      case "cubo":
-        return Widgetcubo();
-      default:
-        return Widgetvolumen();
-    }
+  switch (forma.tipo) {
+    case "cilindro":
+      return Widgetcilindro();
+    case "cubo":
+      return Widgetcubo();
+    case "cono":
+      return Widgetrectangulotrinagulo();
+    case "volumen": 
+    default:
+      return Widgetvolumen();
   }
+}
+
+  @override
+void initState() {
+  super.initState();
+  selectedImage = "volumen"; 
+}
 
   @override
   Widget build(BuildContext context) {
@@ -56,18 +65,22 @@ class _MainpageState extends State<Mainpage1> {
 
               SizedBox(height: 30),
 
-              Container(
-                child: buildWidget(
-                  Forma(
-                    selectedImage ?? "volumen"
-                    )
-                  )
-                ),
+              Selectableforma(
+                onFormaSelected: (tipo) {
+                  setState(() {
+                    selectedImage = tipo;
+                  });
+                },
+              ),
+
+              SizedBox(height: 20),
+
+              if (selectedImage != null)
+                Container(child: buildWidget(Forma(selectedImage!))),
 
               SizedBox(height: 12),
 
-              Column(
-                children: formas.map((f) => buildWidget(f)).toList()),
+              Column(children: formas.map((f) => buildWidget(f)).toList()),
 
               SizedBox(height: 12),
 
@@ -81,7 +94,7 @@ class _MainpageState extends State<Mainpage1> {
                 ),
                 onPressed: () {
                   setState(() {
-                    formas.add(Forma(selectedImage ?? "volumen")); // default
+                    formas.add(Forma(selectedImage ?? "volumen"));
                   });
                 },
                 child: Text("Añade otra forma"),
@@ -97,7 +110,7 @@ class _MainpageState extends State<Mainpage1> {
                     : null,
                 child: Text("Eliminar la forma"),
               ),
-              
+
               SizedBox(height: 12),
 
               Text("Volumen en metros cúbicos (m³): "),
