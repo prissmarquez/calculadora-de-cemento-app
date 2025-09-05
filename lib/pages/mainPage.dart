@@ -7,11 +7,11 @@ import 'package:cement_app/pages/typePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class Mainpage1 extends StatefulWidget {
-  const Mainpage1({super.key});
+class Mainpage extends StatefulWidget {
+  const Mainpage({super.key});
 
   @override
-  State<Mainpage1> createState() => _MainpageState();
+  State<Mainpage> createState() => _MainpageState();
 }
 
 // Clase para manejar tipo de forma
@@ -20,7 +20,7 @@ class Forma {
   Forma(this.tipo);
 }
 
-class _MainpageState extends State<Mainpage1> {
+class _MainpageState extends State<Mainpage> {
   List<Forma> formas = [];
   String? selectedImage;
 
@@ -85,6 +85,9 @@ class _MainpageState extends State<Mainpage1> {
                   Forma f = entry.value;
                   return Column(
                     children: [
+                      //espacio entre una forma y otra 
+                      SizedBox(height: 30),
+                      //fila de formas
                       Selectableforma(
                         onFormaSelected: (tipo) {
                           setState(() {
@@ -92,6 +95,8 @@ class _MainpageState extends State<Mainpage1> {
                           });
                         },
                       ),
+                      SizedBox(height: 2),
+                      //container con unidades
                       buildWidget(f), // Widgetvolumen o cualquier otro
                     ],
                   );
