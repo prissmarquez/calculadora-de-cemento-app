@@ -74,10 +74,14 @@ class _MainpageState extends State<Mainpage> {
                 },
               ),
 
+              //sizedBoz entre fila de formas y el container de las medidas 
+              SizedBox(height: 10),
+
               if (selectedImage != null)
                 Container(child: buildWidget(Forma(selectedImage!))),
 
-              SizedBox(height: 12),
+              //sized box entre container de formas y los botones
+              // SizedBox(height: 10),
 
               Column(
                 children: formas.asMap().entries.map((entry) {
@@ -85,7 +89,7 @@ class _MainpageState extends State<Mainpage> {
                   Forma f = entry.value;
                   return Column(
                     children: [
-                      //espacio entre una forma y otra 
+                      //espacio entre una forma y otra
                       SizedBox(height: 30),
                       //fila de formas
                       Selectableforma(
@@ -128,7 +132,9 @@ class _MainpageState extends State<Mainpage> {
 
               SizedBox(height: 12),
 
-              Text("Volumen en metros cúbicos (m³): "),
+              Text(
+                "Volumen en metros cúbicos (m³): "
+              ),
 
               SizedBox(
                 width: 170,

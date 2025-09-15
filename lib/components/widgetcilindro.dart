@@ -46,6 +46,7 @@ class _WidgetcilindroState extends State<Widgetcilindro> {
               width: 80,
               height: 50,
               child: TextField(
+                textAlign: TextAlign.center,
                 textAlignVertical: TextAlignVertical.center,
                 keyboardType: TextInputType.number,
                 inputFormatters: <TextInputFormatter>[
@@ -56,6 +57,9 @@ class _WidgetcilindroState extends State<Widgetcilindro> {
                   hintText: "Angulo",
                 ),
               ),
+            ),
+            SizedBox(
+              width: 80,
             ),
             Text("°"),
           ],
