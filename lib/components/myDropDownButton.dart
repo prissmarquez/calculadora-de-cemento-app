@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 class Mydropdownbutton<T> extends StatefulWidget {
-  //“El tipo lo va a decidir el que use mi widget”, por eso es T"
+  //“Es tipo lo va a decidir el que use mi widget”, por eso es T"
   // final List<T> items;
   // final T? selectedValue;
   // final ValueChanged<T?>? onChanged;
