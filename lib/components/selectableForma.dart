@@ -3,7 +3,7 @@ import 'package:cement_app/components/myselectableimage.dart';
 
 //se crea la fila de formas
 class Selectableforma extends StatefulWidget {
-  final Function(String) onFormaSelected; // callback hacia Mainpage1
+  final Function(String) onFormaSelected; // callback hacia Mainpage
 
   const Selectableforma({
     super.key, 

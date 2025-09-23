@@ -1,6 +1,6 @@
 import 'package:cement_app/components/selectableForma.dart';
 import 'package:cement_app/components/widgetRectanguloTrinagulo.dart';
-import 'package:cement_app/components/widgetVolumen.dart';
+import 'package:cement_app/components/widgetoriginal.dart';
 import 'package:cement_app/components/widgetcilindro.dart';
 import 'package:cement_app/components/widgetcubo.dart';
 import 'package:cement_app/pages/typePage.dart';
@@ -16,8 +16,12 @@ class Mainpage extends StatefulWidget {
 
 // Clase para manejar tipo de forma
 class Forma {
+  double volumen;
   String tipo;
-  Forma(this.tipo);
+  Forma(
+    this.tipo,
+    {this.volumen = 0}
+    );
 }
 
 class _MainpageState extends State<Mainpage> {
@@ -30,7 +34,13 @@ class _MainpageState extends State<Mainpage> {
       case "cilindro":
         return Widgetcilindro();
       case "cubo":
-        return Widgetcubo();
+        return Widgetcubo(
+          onVolumenChange: (volumen) {
+            setState(() {
+              forma.volumen = volumen; // 🔹 Guardamos el volumen del cubo
+            });
+          },
+        );
       case "cono":
         return Widgetrectangulotrinagulo();
       case "volumen":

@@ -3,14 +3,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class Widgetcubo extends StatefulWidget {
-  const Widgetcubo({super.key});
+  //con esto vamos a mandar la informacion a mainPage
+  final Function(double) onVolumenChange;
+
+  const Widgetcubo({
+    super.key, 
+    required this.onVolumenChange, 
+    });
 
   @override
   State<Widgetcubo> createState() => _WidgetcuboState();
 }
 
 class _WidgetcuboState extends State<Widgetcubo> {
-    String? selectedImage;
+  //todo inicia en cero
+  double ancho = 0;
+  double largo = 0;
+  double profundidad = 0;
+
+  //void no devuleve nada
+  void calcularVolumen() {
+    double volumen = ancho * largo * profundidad;
+    widget.onVolumenChange(volumen); // se manda al Mainpage
+  }
+
+  String? selectedImage;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -21,12 +38,18 @@ class _WidgetcuboState extends State<Widgetcubo> {
             SizedBox(
               width: 80,
               height: 50,
+              //----Ancho------//
               child: TextField(
                 textAlignVertical: TextAlignVertical.center,
                 keyboardType: TextInputType.number,
+                //esto se ejecuta cuando el usuario escribe algo
+                onChanged: (value) {
+                  //convierte el texto en un numero
+                  ancho = double.tryParse(value) ?? 0;
+                  calcularVolumen();
+                },
                 inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter
-                      .digitsOnly, // Allow only digits
+                  FilteringTextInputFormatter.digitsOnly, // Allow only digits
                 ],
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
@@ -39,18 +62,22 @@ class _WidgetcuboState extends State<Widgetcubo> {
             Specialddownbutton(),
           ],
         ),
-    
+
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             SizedBox(
               width: 80,
               height: 50,
+              //------Largo------//
               child: TextField(
                 keyboardType: TextInputType.number,
+                onChanged: (value) {
+                  largo = double.tryParse(value) ?? 0;
+                  calcularVolumen();
+                },
                 inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter
-                      .digitsOnly, // Allow only digits
+                  FilteringTextInputFormatter.digitsOnly, // Allow only digits
                 ],
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
@@ -59,12 +86,12 @@ class _WidgetcuboState extends State<Widgetcubo> {
                 ),
               ),
             ),
-    
+
             //para eligir la unidadd
             Specialddownbutton(),
           ],
         ),
-    
+
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -72,11 +99,15 @@ class _WidgetcuboState extends State<Widgetcubo> {
             SizedBox(
               width: 80,
               height: 50,
+              //------Profundidad-----//
               child: TextField(
                 keyboardType: TextInputType.number,
+                onChanged: (value) {
+                  largo = double.tryParse(value) ?? 0;
+                  calcularVolumen();
+                },
                 inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter
-                      .digitsOnly, // Allow only digits
+                  FilteringTextInputFormatter.digitsOnly, // Allow only digits
                 ],
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
@@ -89,9 +120,7 @@ class _WidgetcuboState extends State<Widgetcubo> {
             Specialddownbutton(),
           ],
         ),
-        SizedBox(
-          height: 20,
-        )
+        SizedBox(height: 20),
       ],
     );
   }
