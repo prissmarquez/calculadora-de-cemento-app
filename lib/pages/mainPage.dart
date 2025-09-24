@@ -56,7 +56,7 @@ class _MainpageState extends State<Mainpage> {
         return SizedBox();
     }
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,30 +78,23 @@ class _MainpageState extends State<Mainpage> {
               SizedBox(height: 30),
 
               //fila de formas
-Selectableforma(
-  onFormaSelected: (tipo) {
-    setState(() {
-      selectedImage = tipo;
-      if (formas.isEmpty) {
-        formas.add(Forma(tipo));   // si no hay ninguna, la crea
-      } else {
-        formas[0].tipo = tipo;     // si ya hay, reemplaza la primera
-      }
-    });
-  },
-),
+              Selectableforma(
+                onFormaSelected: (tipo) {
+                  setState(() {
+                    selectedImage = tipo;
+                    if (formas.isEmpty) {
+                      formas.add(Forma(tipo)); // si no hay ninguna, la crea
+                    } else {
+                      formas[0].tipo = tipo; // si ya hay, reemplaza la primera
+                    }
+                  });
+                },
+              ),
 
               //sizedBoz entre fila de formas y el container de las medidas
               SizedBox(height: 10),
 
-              if (selectedImage != null) ...[
-  if (formas.isEmpty)
-    // 👉 Creamos la primera forma real
-    buildWidget(Forma(selectedImage!))
-  else
-    // 👉 Usamos la que ya está guardada
-    buildWidget(formas.first),
-],
+              // if (formas.isNotEmpty) buildWidget(formas.first),
 
               //sized box entre container de formas y los botones
               // SizedBox(height: 10),
@@ -111,19 +104,10 @@ Selectableforma(
                   Forma f = entry.value;
                   return Column(
                     children: [
-                      //espacio entre una forma y otra
-                      SizedBox(height: 30),
-                      //fila de formas
-                      Selectableforma(
-                        onFormaSelected: (tipo) {
-                          setState(() {
-                            formas[index].tipo = tipo;
-                          });
-                        },
-                      ),
-                      SizedBox(height: 2),
+                      
+                      SizedBox(height: 20),
                       //container con unidades
-                      buildWidget(f), // Widgetvolumen o cualquier otro
+                      buildWidget(f), //solo el widget de volumen
                     ],
                   );
                 }).toList(),
@@ -132,13 +116,26 @@ Selectableforma(
               SizedBox(height: 12),
 
               ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    formas.add(Forma(selectedImage!));
-                  });
-                },
-                child: Text("Añade otra forma"),
-              ),
+  onPressed: selectedImage != null
+      ? () {
+          setState(() {
+            formas.add(Forma(selectedImage!));
+          });
+        }
+      : null, 
+  child: Text("Añadir otra forma"),
+),
+
+
+              // ElevatedButton(
+              //   onPressed: () {
+              //     setState(() {
+              //       formas.add(Forma(selectedImage!));
+              //     });
+              //   },
+              //   child: Text("Añade otra forma"),
+              // ),
+
               SizedBox(height: 12),
 
               ElevatedButton(
@@ -185,16 +182,27 @@ Selectableforma(
 
               //Mainpage cuando vas a Typepage, debes pasar la lista de formas
               ElevatedButton(
-                onPressed: formas.isNotEmpty
-                    ? () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Typepage(formas: formas),
-                          ),
-                        );
-                      }
-                    : null,
+                onPressed: () {
+                  final formasValidas = formas
+                      .where((f) => f.volumen > 0)
+                      .toList();
+                  if (formasValidas.isNotEmpty) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Typepage(formas: formasValidas),
+                      ),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          "Debes ingresar al menos un volumen válido",
+                        ),
+                      ),
+                    );
+                  }
+                },
                 child: Text("Siguiente"),
               ),
             ],
