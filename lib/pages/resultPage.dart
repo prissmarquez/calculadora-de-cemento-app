@@ -9,16 +9,14 @@ class Resultpage extends StatefulWidget {
   final String? fraguado;
   final String? revenimiento;
 
-
-
-  const Resultpage({super.key,
-  required this.formas,
+  const Resultpage({
+    super.key,
+    required this.formas,
     this.elementos,
     this.servicio,
     this.resistencia,
     this.fraguado,
     this.revenimiento,
-
   });
 
   @override
@@ -37,7 +35,7 @@ class _ResultpageState extends State<Resultpage> {
               children: [
                 Text("Resultado de Calculo"),
 
-                                SizedBox(height: 20),
+                SizedBox(height: 20),
 
                 Text("Elemento: ${widget.elementos ?? "-"}"),
                 Text("Servicio: ${widget.servicio ?? "-"}"),
@@ -46,8 +44,7 @@ class _ResultpageState extends State<Resultpage> {
                 Text("Revenimiento: ${widget.revenimiento ?? "-"}"),
                 SizedBox(height: 20),
 
-
-                 // Mostrar cada forma y su volumen
+                // Mostrar cada forma y su volumen
                 ...widget.formas.map((forma) {
                   String descripcion = "";
                   switch (forma.tipo) {
@@ -73,20 +70,17 @@ class _ResultpageState extends State<Resultpage> {
                   }
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 6),
-                    child: Text(
-                      descripcion,
-                      style: TextStyle(fontSize: 18),
-                    ),
+                    child: Text(descripcion, style: TextStyle(fontSize: 18)),
                   );
                 }).toList(),
 
                 SizedBox(height: 25),
                 ElevatedButton(
                   onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text("Atras"),
-                )
+                    Navigator.pop(context);
+                  },
+                  child: Text("Atras"),
+                ),
               ],
             ),
           ),
