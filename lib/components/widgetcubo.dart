@@ -103,7 +103,7 @@ class _WidgetcuboState extends State<Widgetcubo> {
               child: TextField(
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
-                  largo = double.tryParse(value) ?? 0;
+                  profundidad = double.tryParse(value) ?? 0;
                   calcularVolumen();
                 },
                 inputFormatters: <TextInputFormatter>[

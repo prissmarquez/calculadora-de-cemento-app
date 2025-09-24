@@ -32,7 +32,13 @@ class _MainpageState extends State<Mainpage> {
   Widget buildWidget(Forma forma) {
     switch (forma.tipo) {
       case "cilindro":
-        return Widgetcilindro();
+        return Widgetcilindro(
+          onVolumenChange: (volumen) {
+            setState(() {
+              forma.volumen = volumen; // 🔹 Guardamos el volumen del cubo
+            });
+          },
+        );
       case "cubo":
         return Widgetcubo(
           onVolumenChange: (volumen) {
@@ -42,7 +48,13 @@ class _MainpageState extends State<Mainpage> {
           },
         );
       case "cono":
-        return Widgetrectangulotrinagulo();
+        return Widgetrectangulotrinagulo(
+          onVolumenChange: (volumen) {
+            setState(() {
+              forma.volumen = volumen; // 🔹 Guardamos el volumen del cubo
+            });
+          },
+        );
       case "volumen":
       default:
         return Widgetvolumen();
