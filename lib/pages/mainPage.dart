@@ -1,6 +1,5 @@
 import 'package:cement_app/components/selectableForma.dart';
 import 'package:cement_app/components/widgetRectanguloTrinagulo.dart';
-import 'package:cement_app/components/widgetoriginal.dart';
 import 'package:cement_app/components/widgetcilindro.dart';
 import 'package:cement_app/components/widgetcubo.dart';
 import 'package:cement_app/pages/typePage.dart';
@@ -54,16 +53,10 @@ class _MainpageState extends State<Mainpage> {
         );
       case "volumen":
       default:
-        return Widgetvolumen();
+        return SizedBox();
     }
   }
-
-  @override
-  void initState() {
-    super.initState();
-    selectedImage = "volumen";
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,19 +78,30 @@ class _MainpageState extends State<Mainpage> {
               SizedBox(height: 30),
 
               //fila de formas
-              Selectableforma(
-                onFormaSelected: (tipo) {
-                  setState(() {
-                    selectedImage = tipo;
-                  });
-                },
-              ),
+Selectableforma(
+  onFormaSelected: (tipo) {
+    setState(() {
+      selectedImage = tipo;
+      if (formas.isEmpty) {
+        formas.add(Forma(tipo));   // si no hay ninguna, la crea
+      } else {
+        formas[0].tipo = tipo;     // si ya hay, reemplaza la primera
+      }
+    });
+  },
+),
 
               //sizedBoz entre fila de formas y el container de las medidas
               SizedBox(height: 10),
 
-              if (selectedImage != null)
-                Container(child: buildWidget(Forma(selectedImage!))),
+              if (selectedImage != null) ...[
+  if (formas.isEmpty)
+    // 👉 Creamos la primera forma real
+    buildWidget(Forma(selectedImage!))
+  else
+    // 👉 Usamos la que ya está guardada
+    buildWidget(formas.first),
+],
 
               //sized box entre container de formas y los botones
               // SizedBox(height: 10),
