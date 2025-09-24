@@ -18,10 +18,7 @@ class Mainpage extends StatefulWidget {
 class Forma {
   double volumen;
   String tipo;
-  Forma(
-    this.tipo,
-    {this.volumen = 0}
-    );
+  Forma(this.tipo, {this.volumen = 0});
 }
 
 class _MainpageState extends State<Mainpage> {
@@ -96,7 +93,7 @@ class _MainpageState extends State<Mainpage> {
                 },
               ),
 
-              //sizedBoz entre fila de formas y el container de las medidas 
+              //sizedBoz entre fila de formas y el container de las medidas
               SizedBox(height: 10),
 
               if (selectedImage != null)
@@ -104,7 +101,6 @@ class _MainpageState extends State<Mainpage> {
 
               //sized box entre container de formas y los botones
               // SizedBox(height: 10),
-
               Column(
                 children: formas.asMap().entries.map((entry) {
                   int index = entry.key;
@@ -154,9 +150,7 @@ class _MainpageState extends State<Mainpage> {
 
               SizedBox(height: 12),
 
-              Text(
-                "Volumen en metros cúbicos (m³): "
-              ),
+              Text("Volumen en metros cúbicos (m³): "),
 
               SizedBox(
                 width: 170,
@@ -185,13 +179,18 @@ class _MainpageState extends State<Mainpage> {
               ),
               SizedBox(height: 25),
 
+              //Mainpage cuando vas a Typepage, debes pasar la lista de formas
               ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Typepage()),
-                  );
-                },
+                onPressed: formas.isNotEmpty
+                    ? () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Typepage(formas: formas),
+                          ),
+                        );
+                      }
+                    : null,
                 child: Text("Siguiente"),
               ),
             ],

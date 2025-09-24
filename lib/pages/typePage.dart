@@ -1,9 +1,11 @@
 import 'package:cement_app/components/myDropDownButton.dart';
+import 'package:cement_app/pages/mainPage.dart';
 import 'package:cement_app/pages/resultPage.dart';
 import 'package:flutter/material.dart';
 
 class Typepage extends StatefulWidget {
-  const Typepage({super.key});
+   final List<Forma> formas;
+  const Typepage({super.key,required this.formas});
 
   @override
   State<Typepage> createState() => _TypepageState();
@@ -141,9 +143,24 @@ class _TypepageState extends State<Typepage> {
 
               SizedBox(height: 12),
 
-              ElevatedButton(onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Resultpage()));
-              }, child: Text("Siguiente")),
+             ElevatedButton(
+  onPressed: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Resultpage(
+          formas: widget.formas,
+          elementos: elementoSelecionado,
+          servicio: servicioSelecionado,
+          resistencia: resistenciaSelecionado,
+          fraguado: fraguadoSelecionado,
+          revenimiento: revenimientoSelecionado,
+        ),
+      ),
+    );
+  },
+  child: Text("Siguiente"),
+),
 
               SizedBox(height: 25),
               ElevatedButton(
