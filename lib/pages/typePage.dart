@@ -5,7 +5,12 @@ import 'package:flutter/material.dart';
 
 class Typepage extends StatefulWidget {
    final List<Forma> formas;
-  const Typepage({super.key,required this.formas});
+    final double porcentajeReserva;
+  const Typepage({
+    super.key,
+    required this.formas,
+    required this.porcentajeReserva,
+    });
 
   @override
   State<Typepage> createState() => _TypepageState();
@@ -38,7 +43,6 @@ class _TypepageState extends State<Typepage> {
     "10 cm",
     "12 cm",
     "4 cm",
-    "28 cm",
     "28 cm",
   ];
   String? elementoSelecionado;
@@ -150,6 +154,7 @@ class _TypepageState extends State<Typepage> {
       MaterialPageRoute(
         builder: (context) => Resultpage(
           formas: widget.formas,
+          porcentajeReserva: widget.porcentajeReserva,
           elementos: elementoSelecionado,
           servicio: servicioSelecionado,
           resistencia: resistenciaSelecionado,

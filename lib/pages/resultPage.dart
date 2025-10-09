@@ -8,6 +8,7 @@ class Resultpage extends StatefulWidget {
   final String? resistencia;
   final String? fraguado;
   final String? revenimiento;
+  final double porcentajeReserva;
 
   const Resultpage({
     super.key,
@@ -17,6 +18,7 @@ class Resultpage extends StatefulWidget {
     this.resistencia,
     this.fraguado,
     this.revenimiento,
+    required this.porcentajeReserva,
   });
 
   @override
@@ -24,8 +26,15 @@ class Resultpage extends StatefulWidget {
 }
 
 class _ResultpageState extends State<Resultpage> {
+  
   @override
   Widget build(BuildContext context) {
+    //  Calculamos los totales aquí
+  double totalVolumen = widget.formas.fold(
+      0, (previousValue, forma) => previousValue + forma.volumen);
+
+  // Aplicamos porcentaje de reserva
+  double volumenConReserva = totalVolumen * (1 + widget.porcentajeReserva / 100);
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -73,6 +82,9 @@ class _ResultpageState extends State<Resultpage> {
                     child: Text(descripcion, style: TextStyle(fontSize: 18)),
                   );
                 }).toList(),
+
+                Text("Volumen total: ${totalVolumen.toStringAsFixed(2)} m³"),
+Text("Volumen con reserva: ${volumenConReserva.toStringAsFixed(2)} m³"),
 
                 SizedBox(height: 25),
                 ElevatedButton(
