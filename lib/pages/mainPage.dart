@@ -22,6 +22,7 @@ class Forma {
 
 class _MainpageState extends State<Mainpage> {
   final TextEditingController reservaController = TextEditingController();
+  final TextEditingController volumenTotalController = TextEditingController();
   String? tipoInicial;
   List<Forma> formas = [];
   String? selectedImage;
@@ -79,7 +80,7 @@ class _MainpageState extends State<Mainpage> {
 
               SizedBox(height: 30),
 
-               // 🔹 BARRA INICIAL — se muestra solo UNA vez al inicio
+              // 🔹 BARRA INICIAL — se muestra solo UNA vez al inicio
               Selectableforma(
                 onFormaSelected: (tipo) {
                   setState(() {
@@ -162,12 +163,12 @@ class _MainpageState extends State<Mainpage> {
               // // SizedBox(height: 10),
               // Column(
               //   children: formas.asMap().entries.map((entry) {
-                  
+
               //     int index = entry.key;
               //     Forma f = entry.value;
               //     return Column(
               //       children: [
-                      
+
               //         SizedBox(height: 20),
               //          //  Barra para cambiar el tipo de figura de cada forma
               //         Selectableforma(
@@ -186,17 +187,16 @@ class _MainpageState extends State<Mainpage> {
 
               // SizedBox(height: 12),
 
-//               ElevatedButton(
-//   onPressed: selectedImage != null
-//       ? () {
-//           setState(() {
-//             formas.add(Forma(selectedImage!));
-//           });
-//         }
-//       : null, 
-//   child: Text("Añadir otra forma"),
-// ),
-
+              //               ElevatedButton(
+              //   onPressed: selectedImage != null
+              //       ? () {
+              //           setState(() {
+              //             formas.add(Forma(selectedImage!));
+              //           });
+              //         }
+              //       : null,
+              //   child: Text("Añadir otra forma"),
+              // ),
               SizedBox(height: 12),
 
               ElevatedButton(
@@ -217,6 +217,7 @@ class _MainpageState extends State<Mainpage> {
               SizedBox(
                 width: 170,
                 child: TextField(
+                  controller: volumenTotalController,
                   keyboardType: TextInputType.number,
                   inputFormatters: <TextInputFormatter>[
                     FilteringTextInputFormatter.digitsOnly, // Allow only digits
@@ -245,20 +246,42 @@ class _MainpageState extends State<Mainpage> {
               //Mainpage cuando vas a Typepage, debes pasar la lista de formas
               ElevatedButton(
                 onPressed: () {
-                  double porcentajeReserva = double.tryParse(reservaController.text) ?? 0.0;
+                  double porcentajeReserva =
+                      double.tryParse(reservaController.text) ?? 0.0;
+                  double volumenManual =
+                      double.tryParse(volumenTotalController.text) ?? 0.0;
+
                   final formasValidas = formas
                       .where((f) => f.volumen > 0)
                       .toList();
-                  if (formasValidas.isNotEmpty) {
+                  if (formasValidas.isNotEmpty || volumenManual > 0) {
+                    // Si el usuario puso el volumen manual, lo tratamos como una "forma"
+                    if (volumenManual > 0) {
+                      formasValidas.add(
+                        Forma("volumen", volumen: volumenManual),
+                      );
+                    }
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => Typepage(
                           formas: formasValidas,
                           porcentajeReserva: porcentajeReserva,
-                          ),
+                        ),
                       ),
                     );
+
+                    // if (formasValidas.isNotEmpty) {
+                    //   Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //       builder: (context) => Typepage(
+                    //         formas: formasValidas,
+                    //         porcentajeReserva: porcentajeReserva,
+                    //         ),
+                    //     ),
+                    //   );
+                    // }
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(

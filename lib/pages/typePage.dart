@@ -42,7 +42,8 @@ class _TypepageState extends State<Typepage> {
   final List<String> revenimiento = [
     "10 cm",
     "12 cm",
-    "4 cm",
+    "14 cm",
+    "18 cm",
     "28 cm",
   ];
   String? elementoSelecionado;
